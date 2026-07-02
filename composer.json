@@ -8,8 +8,6 @@
     "autoload": {
         "classmap": [
         "controllers/",
-        "managers/",
-        "models/",
         "services/"
         ]
     }
