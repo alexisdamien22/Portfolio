@@ -1,6 +1,8 @@
 @import "contact.css";
 @import "background.css";
+@import "header.css";
 
 body{
     font-family: "Poppins", sans-serif;
+    padding-top:110px;
 }
