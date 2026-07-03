@@ -6,15 +6,121 @@
 
 {% block main %}
 
-<main>
+<main class="projects-page">
 
     <h1>Mes projets</h1>
 
-    <pre>
+    {% set featured = projects|filter(p => p.featured is defined and p.featured) %}
 
-{{ dump(projects) }}
+    {% if featured is not empty %}
 
-    </pre>
+        <section class="projects-featured">
+
+            <h2><i class="fas fa-star"></i> Projets mis en avant</h2>
+
+            <div class="projects-grid">
+
+                {% for project in featured %}
+
+                    <div class="project-card featured">
+
+                        <h3>
+                            {{ project.name }}
+                        </h3>
+
+                        <p>
+                            {{ project.description }}
+                        </p>
+
+                        <div class="languages">
+
+                            {% if project.languages is defined %}
+
+                                {% for lang in project.languages %}
+                                    <span class="badge">{{ lang }}</span>
+                                {% endfor %}
+
+                            {% else %}
+                                <span class="badge">{{ project.language }}</span>
+                            {% endif %}
+
+                        </div>
+
+                        <div class="project-actions">
+                            <a href="{{ project.url }}" target="_blank">
+                                Voir le projet
+                            </a>
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+    {% endif %}
+
+    <section class="projects-all">
+
+        <h2><i class="fas fa-folder"></i> Tous les projets</h2>
+
+        <div class="projects-grid">
+
+            {% for project in projects %}
+
+                <div class="project-card">
+
+                    <div class="project-header">
+
+                        <h3>{{ project.name }}</h3>
+
+                        {% if project.featured is defined and project.featured %}
+                            <span class="badge featured-badge"><i class="fas fa-star"></i> Featured</span>
+                        {% endif %}
+
+                    </div>
+
+                    <p>
+                        {{ project.description }}
+                    </p>
+
+                    <div class="languages">
+
+                        {% if project.languages is defined %}
+
+                            {% for lang in project.languages %}
+                                <span class="badge">{{ lang }}</span>
+                            {% endfor %}
+
+                        {% else %}
+                            <span class="badge">{{ project.language }}</span>
+                        {% endif %}
+
+                    </div>
+
+                    <div class="project-footer">
+
+                        {% if project.type is defined and project.type == 'github' %}
+                            <a href="{{ project.url }}" target="_blank">
+                                GitHub
+                            </a>
+                        {% else %}
+                            <a href="{{ project.url }}" target="_blank">
+                                Voir le projet
+                            </a>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
 
 </main>
 

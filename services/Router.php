@@ -68,6 +68,10 @@ class Router
                         $this->ac->updateProjects();
                         break;
 
+                    case "syncGitHub":
+                        $this->ac->syncGitHub();
+                        break;
+
                     case "logout":
                         $this->ac->logout();
                         break;

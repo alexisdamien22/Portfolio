@@ -5,6 +5,7 @@
 @import "messages.css";
 @import "admin-login.css";
 @import "manage_projects.css";
+@import "projects.css";
 
 body{
     font-family: "Poppins", sans-serif;

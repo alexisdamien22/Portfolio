@@ -3,6 +3,9 @@
 class GitHubService
 {
     private const API_URL = "https://api.github.com";
+    private const CACHE_FILE = "data/github_cache.json";
+    private const LANG_CACHE_DIR = "data/lang_cache/";
+    private const CACHE_TTL = 86400;
 
     private static function request(string $endpoint): array
     {
@@ -16,7 +19,7 @@ class GitHubService
         ];
 
         if (!empty($token)) {
-            $headers[] = "Authorization: Bearer " . $token;
+            $headers[] = "Authorization: Bearer $token";
         }
 
         curl_setopt_array($ch, [
@@ -27,18 +30,7 @@ class GitHubService
 
         $response = curl_exec($ch);
 
-        if (curl_errno($ch)) {
-            curl_close($ch);
-            return [];
-        }
-
-        $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
         curl_close($ch);
-
-        if ($statusCode !== 200) {
-            return [];
-        }
 
         $data = json_decode($response, true);
 
@@ -47,58 +39,77 @@ class GitHubService
 
     public static function getRepositories(): array
     {
-        $username = $_ENV["GITHUB_USERNAME"] ?? "";
-
-        if (empty($username)) {
-            return [];
+        if (self::isCacheValid()) {
+            return JsonService::read(self::CACHE_FILE);
         }
 
-        $repositories = self::request(
-            "/users/{$username}/repos?sort=updated&per_page=100"
-        );
+        $username = $_ENV["GITHUB_USERNAME"] ?? "";
+
+        if (!$username) return [];
+
+        $repos = self::request("/users/$username/repos?per_page=100");
 
         $projects = [];
 
-        foreach ($repositories as $repository) {
+        foreach ($repos as $repo) {
 
-            if ($repository["fork"]) {
+            if (!empty($repo["fork"])) {
                 continue;
             }
 
             $projects[] = [
-                "id" => $repository["id"],
-                "type" => "github",
-                "name" => $repository["name"],
-                "description" => $repository["description"] ?? "",
-                "url" => $repository["html_url"],
-                "homepage" => $repository["homepage"] ?: null,
-                "language" => $repository["language"],
-                "stars" => $repository["stargazers_count"],
-                "updated_at" => $repository["updated_at"],
-                "image" => null
+                "id" => $repo["id"],
+                "name" => $repo["name"],
+                "description" => $repo["description"] ?? "",
+                "url" => $repo["html_url"],
+                "language" => $repo["language"],
+                "updated_at" => $repo["updated_at"]
             ];
         }
+
+        JsonService::write(self::CACHE_FILE, $projects);
 
         return $projects;
     }
 
-    public static function getRepository(string $repository): array
-    {
-        $username = $_ENV["GITHUB_USERNAME"] ?? "";
-
-        return self::request("/repos/{$username}/{$repository}");
-    }
-
     public static function getLanguages(string $repo): array
     {
-        $username = $_ENV["GITHUB_USERNAME"] ?? "";
+        $file = self::LANG_CACHE_DIR . $repo . ".json";
 
-        if (!$username) {
-            return [];
+        if (file_exists($file)) {
+            return JsonService::read($file);
         }
 
-        $data = self::request("/repos/{$username}/{$repo}/languages");
+        $username = $_ENV["GITHUB_USERNAME"] ?? "";
 
-        return array_keys($data);
+        $data = self::request("/repos/$username/$repo/languages");
+
+        $langs = array_keys($data);
+
+        JsonService::write($file, $langs);
+
+        return $langs;
+    }
+    
+    private static function isCacheValid(): bool
+    {
+        if (!file_exists(self::CACHE_FILE)) {
+            return false;
+        }
+
+        return (time() - filemtime(self::CACHE_FILE)) < self::CACHE_TTL;
+    }
+
+    public static function clearCache(): void
+    {
+        if (file_exists(self::CACHE_FILE)) {
+            unlink(self::CACHE_FILE);
+        }
+
+        if (is_dir(self::LANG_CACHE_DIR)) {
+            foreach (glob(self::LANG_CACHE_DIR . "*.json") as $file) {
+                unlink($file);
+            }
+        }
     }
 }

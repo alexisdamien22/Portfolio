@@ -123,4 +123,15 @@ class AdminController extends AbstractController
 
         $this->redirect("index.php?route=admin&action=projects");
     }
+
+    public function syncGitHub(): void
+    {
+        AuthService::requireAdmin();
+
+        GitHubService::clearCache();
+
+        PortfolioService::sync();
+
+        $this->redirect("index.php?route=admin&action=projects");
+    }
 }
