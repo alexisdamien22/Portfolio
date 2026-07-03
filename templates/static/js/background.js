@@ -38,11 +38,9 @@ for (let i = 0; i < particleCount; i++) {
     particle.style.animationDelay =
         `${Math.random()*20}s, ${Math.random()*20}s`;
 
-    // Flou variable
     particle.style.filter =
         `blur(${Math.random()*4+1}px)`;
 
-    // Halo lumineux
     particle.style.boxShadow =
         `0 0 ${size*4}px rgba(180,220,255,.8),
          0 0 ${size*8}px rgba(120,180,255,.35)`;
