@@ -2,11 +2,11 @@
 
 class Router
 {
-    private RouteController $rc;
+    private DefaultController $dc;
     private ContactController $cc;
     public function __construct()
     {
-        $this->rc = new RouteController();
+        $this->dc = new DefaultController();
         $this->cc = new ContactController();
     }
 
@@ -15,10 +15,10 @@ class Router
         if(!empty($_GET["route"]))
         {
             if($_GET['route'] === 'projects') {
-                $this->rc->projects();
+                $this->dc->projects();
             }
             else if($_GET['route'] === 'home') {
-                $this->rc->home();
+                $this->dc->home();
             }
             else if($_GET['route'] === 'contact') {
                 if($_SERVER['REQUEST_METHOD'] === 'POST')
@@ -32,12 +32,12 @@ class Router
             }
             else
             {
-                $this->rc->notFound();
+                $this->dc->notFound();
             }
         }
         else
         {
-            $this->rc->home();
+            $this->dc->home();
         }
     }
 }

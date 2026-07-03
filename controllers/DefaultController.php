@@ -1,6 +1,6 @@
 <?php
 
-class RouteController extends AbstractController
+class DefaultController extends AbstractController
 {
     public function home() : void
     {
