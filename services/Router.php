@@ -34,40 +34,47 @@ class Router
             }
             else if ($_GET["route"] === "admin")
             {
-                if ($_SERVER["REQUEST_METHOD"] === "POST")
-                {
-                    $this->ac->login();
+                $action = $_GET["action"] ?? "";
+
+                if ($_SERVER["REQUEST_METHOD"] === "POST" && $action === "updateProjects") {
+                    $this->ac->updateProjects();
+                    return;
                 }
-                else
+
+                if ($_SERVER["REQUEST_METHOD"] === "POST" && empty($action)) {
+                    $this->ac->login();
+                    return;
+                }
+
+                switch ($action)
                 {
-                    $action = $_GET["action"] ?? "";
+                    case "dashboard":
+                        $this->ac->dashboard();
+                        break;
 
-                    switch ($action)
-                    {
-                        case "dashboard":
-                            $this->ac->dashboard();
-                            break;
+                    case "messages":
+                        $this->ac->messages();
+                        break;
 
-                        case "messages":
-                            $this->ac->messages();
-                            break;
+                    case "deleteMessage":
+                        $this->ac->deleteMessage();
+                        break;
 
-                        case "deleteMessage":
-                            $this->ac->deleteMessage();
-                            break;
+                    case "projects":
+                        $this->ac->projects();
+                        break;
 
-                        case "projects":
-                            $this->ac->projects();
-                            break;
+                    case "updateProjects":
+                        $this->ac->updateProjects();
+                        break;
 
-                        case "logout":
-                            $this->ac->logout();
-                            break;
+                    case "logout":
+                        $this->ac->logout();
+                        break;
 
-                        default:
-                            $this->ac->index();
-                            break;
-                    }
+                    default:
+                        $this->ac->index();
+                        break;
                 }
             }
         }

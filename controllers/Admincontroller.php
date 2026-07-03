@@ -96,6 +96,31 @@ class AdminController extends AbstractController
     {
         AuthService::requireAdmin();
 
-        $this->render("admin/manage_projects/manage_projects.html.twig");
+        $projects = PortfolioService::getAdminProjects();
+
+        $this->render("admin/manage_projects/manage_projects.html.twig", [
+                "projects" => $projects
+        ]);
+    }
+
+    public function updateProjects(): void
+    {
+        AuthService::requireAdmin();
+
+        $config = JsonService::read("data/projects.json");
+
+        $visible = $_POST["visible"] ?? [];
+        $featured = $_POST["featured"] ?? [];
+
+        foreach ($config["github"] as $name => &$settings) {
+
+            $settings["visible"] = in_array($name, $visible);
+            $settings["featured"] = in_array($name, $featured);
+
+        }
+
+        JsonService::write("data/projects.json", $config);
+
+        $this->redirect("index.php?route=admin&action=projects");
     }
 }

@@ -9,7 +9,14 @@ class DefaultController extends AbstractController
 
     public function projects() : void
     {
-        $this->render('projects/projects.html.twig', []);
+        $projects = PortfolioService::getPublicProjects();
+
+        $this->render(
+            "projects/projects.html.twig",
+            [
+                "projects" => $projects
+            ]
+        );
     }
 
     public function contact() : void

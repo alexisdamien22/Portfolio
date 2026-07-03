@@ -6,14 +6,60 @@
 
 {% block main %}
 
-<main class="admin">
+<h1>Project Manager</h1>
 
-    <h1>Gestion des projets</h1>
+<form method="POST" action="index.php?route=admin&action=updateProjects">
 
-</main>
+<div class="projects-grid">
 
-{% endblock %}
+    {% for project in projects %}
 
-{% block footer %}
-    {% include "partials/_footer.html.twig" %}
+        <div class="project-card">
+
+            <h3>{{ project.name }}</h3>
+
+            <p>{{ project.description }}</p>
+
+            <div class="languages">
+                {% for lang in project.languages %}
+                    <span class="badge">{{ lang }}</span>
+                {% endfor %}
+            </div>
+
+            <p>
+                <a href="{{ project.url }}" target="_blank">
+                    Voir sur GitHub
+                </a>
+            </p>
+
+            <div class="toggles">
+
+                <label>
+                    <input type="checkbox"
+                           name="visible[]"
+                           value="{{ project.name }}"
+                           {% if project.visible %}checked{% endif %}>
+                    Visible
+                </label>
+
+                <label>
+                    <input type="checkbox"
+                           name="featured[]"
+                           value="{{ project.name }}"
+                           {% if project.featured %}checked{% endif %}>
+                    Featured
+                </label>
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+<button type="submit"><i class="fas fa-save"></i> Sauvegarder</button>
+
+</form>
+
 {% endblock %}
