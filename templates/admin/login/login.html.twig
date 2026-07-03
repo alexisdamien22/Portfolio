@@ -1,0 +1,65 @@
+{% extends "layout.html.twig" %}
+
+{% block header %}
+    {% include "partials/_header.html.twig" %}
+{% endblock %}
+
+{% block main %}
+
+<main class="login">
+
+    <section class="login-card">
+
+        <h1>Administration</h1>
+
+        <p class="subtitle">
+            Connectez-vous pour accéder au tableau de bord.
+        </p>
+
+        {% if error == "invalid" %}
+            <p class="error">
+                Nom d'utilisateur ou mot de passe incorrect.
+            </p>
+        {% endif %}
+
+        <form action="index.php?route=admin" method="POST">
+
+            <div class="input-group">
+                <label for="username">Nom d'utilisateur</label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    required
+                    autocomplete="username"
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="password">Mot de passe</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    required
+                    autocomplete="current-password"
+                >
+            </div>
+
+            <button type="submit">
+                Se connecter
+            </button>
+
+        </form>
+
+    </section>
+
+</main>
+
+{% endblock %}
+
+{% block footer %}
+    {% include "partials/_footer.html.twig" %}
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends "layout.html.twig" %}
+
+{% block header %}
+    {% include "partials/_header.html.twig" %}
+{% endblock %}
+
+{% block main %}
+
+<main class="messages">
+
+    <div class="top">
+
+        <h1>Messages</h1>
+
+        <a href="index.php?route=admin&action=dashboard">
+            ← Dashboard
+        </a>
+
+    </div>
+
+    {% if messages is empty %}
+
+        <p class="empty">
+            Aucun message.
+        </p>
+
+    {% endif %}
+
+    {% for message in messages %}
+
+        <article class="message">
+
+            <div class="message-header">
+
+                <div>
+
+                    <h2>{{ message.subject }}</h2>
+
+                    <p>
+
+                        <strong>{{ message.name }}</strong>
+
+                        •
+
+                        {{ message.email }}
+
+                    </p>
+
+                </div>
+
+                <div class="actions">
+
+                    <span>{{ message.date }}</span>
+
+                    <a
+                        class="delete-btn"
+                        href="index.php?route=admin&action=deleteMessage&id={{ loop.index0 }}"
+                        onclick="return confirm('Supprimer ce message ?')"
+                        title="Supprimer le message"
+                    >
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <p class="content">
+
+                {{ message.message }}
+
+            </p>
+
+        </article>
+
+    {% endfor %}
+
+</main>
+
+{% endblock %}
+
+{% block footer %}
+    {% include "partials/_footer.html.twig" %}
+{% endblock %}

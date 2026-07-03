@@ -1,6 +1,9 @@
 @import "contact.css";
 @import "background.css";
 @import "header.css";
+@import "admin.css";
+@import "messages.css";
+@import "admin-login.css";
 
 body{
     font-family: "Poppins", sans-serif;

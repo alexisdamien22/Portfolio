@@ -7,10 +7,13 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AbstractController' => $baseDir . '/controllers/AbstractController.php',
+    'AdminController' => $baseDir . '/controllers/Admincontroller.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+    'AuthService' => $baseDir . '/services/AuthService.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'ContactController' => $baseDir . '/controllers/ContactController.php',
     'DefaultController' => $baseDir . '/controllers/DefaultController.php',
+    'JsonService' => $baseDir . '/services/JsonService.php',
     'PhpToken' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
     'Router' => $baseDir . '/services/Router.php',
     'Stringable' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',

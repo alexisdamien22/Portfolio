@@ -1,0 +1,185 @@
+.messages{
+
+    width:min(1000px,90%);
+
+    margin:auto;
+
+    padding:50px 0;
+}
+
+.top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:40px;
+}
+
+.top h1{
+
+    color:white;
+}
+
+.top a{
+
+    color:#7fb3ff;
+
+    text-decoration:none;
+}
+
+.message{
+
+    padding:30px;
+
+    margin-bottom:25px;
+
+    border-radius:20px;
+
+    background:rgba(22,28,42,.35);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.05);
+
+    transition:.3s;
+}
+
+.message:hover{
+
+    border-color:rgba(120,170,255,.25);
+}
+
+.message-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    margin-bottom:20px;
+}
+
+.message-header h2{
+
+    color:white;
+
+    margin-bottom:8px;
+}
+
+.message-header p{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-top:8px;
+
+    color:#c2d0e6;
+}
+
+.message-header p strong{
+
+    color:white;
+}
+
+.message-header p span{
+
+    padding:4px 10px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.06);
+
+    font-size:.85rem;
+}
+
+.actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+}
+
+.actions span{
+
+    color:#9fb0ca;
+
+    font-size:.9rem;
+}
+
+.delete-btn{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:12px;
+
+    background:rgba(255,70,70,.12);
+
+    border:1px solid rgba(255,70,70,.25);
+
+    color:#ff6b6b;
+
+    text-decoration:none;
+
+    transition:.25s;
+}
+
+.delete-btn i{
+
+    font-size:1rem;
+}
+
+.delete-btn:hover{
+
+    background:rgba(255,70,70,.22);
+
+    border-color:rgba(255,70,70,.45);
+
+    color:#ff8d8d;
+
+    transform:translateY(-2px);
+}
+
+.content{
+
+    margin-top:20px;
+
+    padding:20px;
+
+    background:rgba(255,255,255,.06);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:14px;
+
+    color:#e7edf8;
+
+    line-height:1.7;
+
+    white-space:pre-wrap;
+
+    overflow-wrap:break-word;
+}
+
+.empty{
+
+    text-align:center;
+
+    color:white;
+}

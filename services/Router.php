@@ -4,10 +4,12 @@ class Router
 {
     private DefaultController $dc;
     private ContactController $cc;
+    private AdminController $ac;
     public function __construct()
     {
         $this->dc = new DefaultController();
         $this->cc = new ContactController();
+        $this->ac = new AdminController();
     }
 
     public function handleRequest() : void
@@ -30,9 +32,43 @@ class Router
                     $this->cc->contact();
                 }
             }
-            else
+            else if ($_GET["route"] === "admin")
             {
-                $this->dc->notFound();
+                if ($_SERVER["REQUEST_METHOD"] === "POST")
+                {
+                    $this->ac->login();
+                }
+                else
+                {
+                    $action = $_GET["action"] ?? "";
+
+                    switch ($action)
+                    {
+                        case "dashboard":
+                            $this->ac->dashboard();
+                            break;
+
+                        case "messages":
+                            $this->ac->messages();
+                            break;
+
+                        case "deleteMessage":
+                            $this->ac->deleteMessage();
+                            break;
+
+                        case "projects":
+                            $this->ac->projects();
+                            break;
+
+                        case "logout":
+                            $this->ac->logout();
+                            break;
+
+                        default:
+                            $this->ac->index();
+                            break;
+                    }
+                }
             }
         }
         else

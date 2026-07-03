@@ -4,21 +4,16 @@ class ContactController extends AbstractController
 {
     public function contact(): void
     {
-        $loader = new \Twig\Loader\FilesystemLoader('templates');
-        $twig = new \Twig\Environment($loader);
-
-        $error = $_GET['error'] ?? null;
-        $success = isset($_GET['success']);
-
-        echo $twig->render('contact/contact.html.twig', [
-            'error' => $error,
-            'success' => $success
+        $this->render("contact/contact.html.twig", [
+            "error" => $_GET["error"] ?? null,
+            "success" => isset($_GET["success"])
         ]);
     }
 
     public function contactForm(): void
     {
         $contact = [
+            "id" => uniqid(),
             "name" => trim($_POST["name"]),
             "email" => trim($_POST["email"]),
             "subject" => trim($_POST["subject"]),
@@ -26,17 +21,7 @@ class ContactController extends AbstractController
             "date" => date("Y-m-d H:i:s")
         ];
 
-        $file = "data/contacts.json";
-
-        if (!file_exists($file)) {
-            file_put_contents($file, json_encode([]));
-        }
-
-        $contacts = json_decode(file_get_contents($file), true);
-
-        if (!is_array($contacts)) {
-            $contacts = [];
-        }
+        $contacts = JsonService::read("data/contacts.json");
 
         foreach ($contacts as $existingContact) {
 
@@ -45,27 +30,21 @@ class ContactController extends AbstractController
                 $existingContact["subject"] === $contact["subject"] &&
                 $existingContact["message"] === $contact["message"]
             ) {
-                header("Location: index.php?route=contact&error=duplicate");
-                exit;
+                $this->redirect("index.php?route=contact&error=duplicate");
             }
 
             if (
                 strtolower($existingContact["email"]) === strtolower($contact["email"]) &&
                 (time() - strtotime($existingContact["date"])) < 300
             ) {
-                header("Location: index.php?route=contact&error=spam");
-                exit;
+                $this->redirect("index.php?route=contact&error=spam");
             }
         }
 
         $contacts[] = $contact;
 
-        file_put_contents(
-            $file,
-            json_encode($contacts, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
-        );
+        JsonService::write("data/contacts.json", $contacts);
 
-        header("Location: index.php?route=contact&success=1");
-        exit;
+        $this->redirect("index.php?route=contact&success=1");
     }
 }

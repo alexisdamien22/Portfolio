@@ -1,0 +1,40 @@
+{% extends "layout.html.twig" %}
+
+{% block header %}
+    {% include "partials/_header.html.twig" %}
+{% endblock %}
+
+{% block main %}
+
+<main class="admin">
+
+    <h1>Administration</h1>
+
+    <div class="cards">
+
+        <a class="card" href="index.php?route=admin&action=messages">
+            <i class="fa-solid fa-inbox"></i>
+            <h2>Messages</h2>
+            <p>Consulter les messages reçus.</p>
+        </a>
+
+        <a class="card" href="index.php?route=admin&action=projects">
+            <i class="fa-brands fa-github"></i>
+            <h2>Projets</h2>
+            <p>Gérer les dépôts GitHub.</p>
+        </a>
+
+    </div>
+
+    <a class="logout" href="index.php?route=admin&action=logout">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Déconnexion
+    </a>
+
+</main>
+
+{% endblock %}
+
+{% block footer %}
+    {% include "partials/_footer.html.twig" %}
+{% endblock %}

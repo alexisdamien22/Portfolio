@@ -81,10 +81,13 @@ class ComposerStaticInit55c2dfcdbf3daf9f124aeb07d3d7a2dd
 
     public static $classMap = array (
         'AbstractController' => __DIR__ . '/../..' . '/controllers/AbstractController.php',
+        'AdminController' => __DIR__ . '/../..' . '/controllers/Admincontroller.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+        'AuthService' => __DIR__ . '/../..' . '/services/AuthService.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'ContactController' => __DIR__ . '/../..' . '/controllers/ContactController.php',
         'DefaultController' => __DIR__ . '/../..' . '/controllers/DefaultController.php',
+        'JsonService' => __DIR__ . '/../..' . '/services/JsonService.php',
         'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
         'Router' => __DIR__ . '/../..' . '/services/Router.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
