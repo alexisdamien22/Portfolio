@@ -32,7 +32,6 @@ class PortfolioService
 
     public static function getAdminProjects(): array
     {
-        self::sync();
 
         $config = JsonService::read("data/projects.json");
 

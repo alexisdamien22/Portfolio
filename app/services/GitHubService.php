@@ -75,8 +75,9 @@ class GitHubService
     public static function getLanguages(string $repo): array
     {
         $file = self::LANG_CACHE_DIR . $repo . ".json";
+        $fullPath = ROOT_PATH . "/" . ltrim($file, "/");
 
-        if (file_exists($file)) {
+        if (file_exists($fullPath)) {
             return JsonService::read($file);
         }
 
@@ -93,21 +94,27 @@ class GitHubService
     
     private static function isCacheValid(): bool
     {
-        if (!file_exists(self::CACHE_FILE)) {
+        $fullPath = ROOT_PATH . "/" . ltrim(self::CACHE_FILE, "/");
+
+        if (!file_exists($fullPath)) {
             return false;
         }
 
-        return (time() - filemtime(self::CACHE_FILE)) < self::CACHE_TTL;
+        return (time() - filemtime($fullPath)) < self::CACHE_TTL;
     }
 
     public static function clearCache(): void
     {
-        if (file_exists(self::CACHE_FILE)) {
-            unlink(self::CACHE_FILE);
+        $cachePath = ROOT_PATH . "/" . ltrim(self::CACHE_FILE, "/");
+
+        if (file_exists($cachePath)) {
+            unlink($cachePath);
         }
 
-        if (is_dir(self::LANG_CACHE_DIR)) {
-            foreach (glob(self::LANG_CACHE_DIR . "*.json") as $file) {
+        $langDir = ROOT_PATH . "/" . ltrim(self::LANG_CACHE_DIR, "/");
+
+        if (is_dir($langDir)) {
+            foreach (glob($langDir . "*.json") as $file) {
                 unlink($file);
             }
         }
