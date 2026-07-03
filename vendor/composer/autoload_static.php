@@ -83,6 +83,7 @@ class ComposerStaticInit55c2dfcdbf3daf9f124aeb07d3d7a2dd
         'AbstractController' => __DIR__ . '/../..' . '/controllers/AbstractController.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'ContactController' => __DIR__ . '/../..' . '/controllers/ContactController.php',
         'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
         'RouteController' => __DIR__ . '/../..' . '/controllers/RouteController.php',
         'Router' => __DIR__ . '/../..' . '/services/Router.php',

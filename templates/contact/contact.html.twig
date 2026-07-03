@@ -5,12 +5,79 @@
 {% endblock %}
 
 {% block main %}
-    <main>
-        <h1>Contact</h1>
-        <a href="index.php?route=home">
-            Accueil
-        </a>
-    </main>
+<main class="contact">
+
+    <h1>Contact</h1>
+
+    <p>Une question ? Un projet ? Envoyez-moi un message.</p>
+
+    {% if success %}
+        <p class="success">
+            Votre message a bien été envoyé !
+        </p>
+    {% endif %}
+
+    {% if error == "duplicate" %}
+        <p class="error">
+            Ce message a déjà été envoyé.
+        </p>
+    {% endif %}
+
+    {% if error == "spam" %}
+        <p class="error">
+            Vous devez attendre 5 minutes avant d'envoyer un nouveau message.
+        </p>
+    {% endif %}
+
+    <form id="contactForm" action="index.php?route=contact&action=send" method="POST">
+
+        <div>
+            <label for="name">Nom</label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="email">Email</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="subject">Sujet</label>
+            <input
+                type="text"
+                id="subject"
+                name="subject"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="message">Message</label>
+            <textarea
+                id="message"
+                name="message"
+                rows="8"
+                required
+            ></textarea>
+        </div>
+
+        <button type="submit">
+            Envoyer
+        </button>
+
+    </form>
+
+</main>
 {% endblock %}
 
 {% block footer %}

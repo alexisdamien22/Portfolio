@@ -3,9 +3,11 @@
 class Router
 {
     private RouteController $rc;
+    private ContactController $cc;
     public function __construct()
     {
         $this->rc = new RouteController();
+        $this->cc = new ContactController();
     }
 
     public function handleRequest() : void
@@ -19,7 +21,14 @@ class Router
                 $this->rc->home();
             }
             else if($_GET['route'] === 'contact') {
-                $this->rc->contact();
+                if($_SERVER['REQUEST_METHOD'] === 'POST')
+                {
+                    $this->cc->contactForm();
+                }
+                else
+                {
+                    $this->cc->contact();
+                }
             }
             else
             {

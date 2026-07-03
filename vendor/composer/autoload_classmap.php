@@ -9,6 +9,7 @@ return array(
     'AbstractController' => $baseDir . '/controllers/AbstractController.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'ContactController' => $baseDir . '/controllers/ContactController.php',
     'PhpToken' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
     'RouteController' => $baseDir . '/controllers/RouteController.php',
     'Router' => $baseDir . '/services/Router.php',
