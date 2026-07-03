@@ -7,8 +7,8 @@
     },
     "autoload": {
         "classmap": [
-        "controllers/",
-        "services/"
+        "app/controllers/",
+        "app/services/"
         ]
     }
 }

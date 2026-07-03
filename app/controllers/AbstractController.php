@@ -6,7 +6,9 @@ abstract class AbstractController
 
     public function __construct()
     {
-        $loader = new \Twig\Loader\FilesystemLoader("templates");
+        $loader = new \Twig\Loader\FilesystemLoader(
+            ROOT_PATH . "/app/templates"
+        );
 
         $this->twig = new \Twig\Environment($loader, [
             "debug" => true

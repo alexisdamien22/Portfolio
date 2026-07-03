@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit55c2dfcdbf3daf9f124aeb07d3d7a2dd
+class ComposerStaticInit489c7a5ce1c2d0a415645b418bd15b74
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -80,18 +80,18 @@ class ComposerStaticInit55c2dfcdbf3daf9f124aeb07d3d7a2dd
     );
 
     public static $classMap = array (
-        'AbstractController' => __DIR__ . '/../..' . '/controllers/AbstractController.php',
-        'AdminController' => __DIR__ . '/../..' . '/controllers/Admincontroller.php',
+        'AbstractController' => __DIR__ . '/../..' . '/app/controllers/AbstractController.php',
+        'AdminController' => __DIR__ . '/../..' . '/app/controllers/Admincontroller.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
-        'AuthService' => __DIR__ . '/../..' . '/services/AuthService.php',
+        'AuthService' => __DIR__ . '/../..' . '/app/services/AuthService.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'ContactController' => __DIR__ . '/../..' . '/controllers/ContactController.php',
-        'DefaultController' => __DIR__ . '/../..' . '/controllers/DefaultController.php',
-        'GitHubService' => __DIR__ . '/../..' . '/services/GitHubService.php',
-        'JsonService' => __DIR__ . '/../..' . '/services/JsonService.php',
+        'ContactController' => __DIR__ . '/../..' . '/app/controllers/ContactController.php',
+        'DefaultController' => __DIR__ . '/../..' . '/app/controllers/DefaultController.php',
+        'GitHubService' => __DIR__ . '/../..' . '/app/services/GitHubService.php',
+        'JsonService' => __DIR__ . '/../..' . '/app/services/JsonService.php',
         'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
-        'PortfolioService' => __DIR__ . '/../..' . '/services/PortFolioService.php',
-        'Router' => __DIR__ . '/../..' . '/services/Router.php',
+        'PortfolioService' => __DIR__ . '/../..' . '/app/services/PortFolioService.php',
+        'Router' => __DIR__ . '/../..' . '/app/services/Router.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
@@ -100,9 +100,9 @@ class ComposerStaticInit55c2dfcdbf3daf9f124aeb07d3d7a2dd
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit55c2dfcdbf3daf9f124aeb07d3d7a2dd::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit55c2dfcdbf3daf9f124aeb07d3d7a2dd::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit55c2dfcdbf3daf9f124aeb07d3d7a2dd::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit489c7a5ce1c2d0a415645b418bd15b74::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit489c7a5ce1c2d0a415645b418bd15b74::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit489c7a5ce1c2d0a415645b418bd15b74::$classMap;
 
         }, null, ClassLoader::class);
     }
