@@ -62,6 +62,10 @@ class PortfolioService
     {
         $projects = self::getAdminProjects();
 
+        usort($projects, function ($a, $b) {
+            return ($b["featured"] ?? false) <=> ($a["featured"] ?? false);
+        });
+
         return array_filter(
             $projects,
             fn($project) => $project["visible"]

@@ -6,63 +6,76 @@
 
 {% block main %}
 
-<h1>Project Manager</h1>
+<main class="admin-container">
 
-<form method="POST" action="index.php?route=admin&action=updateProjects">
+    <section class="admin-header">
 
-<div class="projects-grid">
+        <h1>Project Manager</h1>
+        <p>Gère tes projets GitHub et custom</p>
 
-    {% for project in projects %}
+        <div class="admin-search">
+            <input type="text" id="adminSearch" placeholder="Rechercher un projet...">
+        </div>
 
-        <div class="project-card">
+    </section>
 
-            <h3>{{ project.name }}</h3>
+    <div class="admin-actions top-actions">
+        <button class="admin-btn"><i class="fas fa-save"></i> Sauvegarder</button>
+        <button class="admin-btn"><i class="fas fa-sync-alt"></i> Synchroniser avec GitHub</button>
+    </div>
 
-            <p>{{ project.description }}</p>
+    <form method="POST" action="index.php?route=admin&action=updateProjects">
 
-            <div class="languages">
-                {% for lang in project.languages %}
-                    <span class="badge">{{ lang }}</span>
-                {% endfor %}
-            </div>
+        <div class="admin-grid">
 
-            <p>
-                <a href="{{ project.url }}" target="_blank">
-                    Voir sur GitHub
-                </a>
-            </p>
+            {% for project in projects %}
 
-            <div class="toggles">
+                <div class="admin-card">
 
-                <label>
-                    <input type="checkbox"
-                           name="visible[]"
-                           value="{{ project.name }}"
-                           {% if project.visible %}checked{% endif %}>
-                    Visible
-                </label>
+                    <h3>{{ project.name }}</h3>
 
-                <label>
-                    <input type="checkbox"
-                           name="featured[]"
-                           value="{{ project.name }}"
-                           {% if project.featured %}checked{% endif %}>
-                    Featured
-                </label>
+                    <p>{{ project.description }}</p>
 
-            </div>
+                    <div class="admin-tags">
+                        {% for lang in project.languages %}
+                            <span class="admin-tag">{{ lang }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="admin-switches">
+
+                        <label class="toggle">
+                            Visible
+
+                            <label class="switch">
+                                <input type="checkbox" name="visible[]" value="{{ project.name }}" {% if project.visible %}checked{% endif %}>
+                                <span class="slider"></span>
+                            </label>
+
+                        </label>
+
+                        <label class="toggle">
+                            Featured
+
+                            <label class="switch">
+                                <input type="checkbox" name="featured[]" value="{{ project.name }}" {% if project.featured %}checked{% endif %}>
+                                <span class="slider"></span>
+                            </label>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
 
         </div>
 
-    {% endfor %}
+    </form>
 
-</div>
+</main>
 
-<button type="submit"><i class="fas fa-save"></i> Sauvegarder</button>
-
-<button type="button" onclick="location.href='index.php?route=admin&action=syncGitHub'">
-    <i class="fas fa-sync-alt"></i> Synchroniser avec GitHub
-
-</form>
+<script src="assets/js/adminSearch.js" defer></script>
 
 {% endblock %}
