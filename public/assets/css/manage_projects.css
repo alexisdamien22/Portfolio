@@ -205,3 +205,16 @@
 .admin-btn:hover {
     background: #3b79e0;
 }
+
+@media (max-width: 768px) {
+    .admin-search input {
+        width: 90%;
+    }
+    .admin-header h1 {
+        font-size: 2rem;
+    }
+    .admin-switches {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}

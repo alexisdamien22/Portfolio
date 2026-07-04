@@ -8,6 +8,10 @@
 @import "projects.css";
 @import "home.css";
 
+html, body {
+    background: transparent !important;
+}
+
 body{
     font-family: "Poppins", sans-serif;
     padding-top:110px;
