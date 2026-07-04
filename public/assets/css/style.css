@@ -6,6 +6,7 @@
 @import "admin-login.css";
 @import "manage_projects.css";
 @import "projects.css";
+@import "home.css";
 
 body{
     font-family: "Poppins", sans-serif;

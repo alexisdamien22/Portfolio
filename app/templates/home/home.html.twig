@@ -5,15 +5,53 @@
 {% endblock %}
 
 {% block main %}
-    <main>
-        <h1>Accueil</h1>
-        <a href="index.php?route=projects">
-            Projets
-        </a>
-        <a href="index.php?route=contact">
-            Contact
-        </a>
-    </main>
+<section class="hero">
+
+<h1>Développeur Web</h1>
+
+<p>
+    Je crée des applications web modernes avec PHP, JavaScript et API GitHub.
+</p>
+
+<div class="hero-actions">
+    <a href="index.php?route=projects" class="btn">Voir mes projets</a>
+    <a href="index.php?route=contact" class="btn-outline">Me contacter</a>
+</div>
+
+</section>
+<section class="section">
+
+    <h2 class="section-title">Projets en vedette</h2>
+
+    <div class="projects-grid">
+
+        {% for project in featuredProjects %}
+
+            <div class="card">
+
+                <h3>{{ project.name }}</h3>
+                <p>{{ project.description }}</p>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+<section class="section">
+
+    <h2 class="section-title">Stack</h2>
+
+    <div class="tags">
+        <span>PHP</span>
+        <span>JavaScript</span>
+        <span>MySQL</span>
+        <span>GitHub API</span>
+        <span>Twig</span>
+    </div>
+
+</section>
 {% endblock %}
 
 {% block footer %}
