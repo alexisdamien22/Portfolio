@@ -190,6 +190,16 @@
     color: white;
     cursor: pointer;
     transition: 0.2s;
+
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    color: inherit;
+    font-family: inherit;
+    border: none;
+    box-sizing: border-box;
+    
+    vertical-align: middle;
 }
 
 .admin-btn:hover {
