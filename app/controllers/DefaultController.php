@@ -2,9 +2,15 @@
 
 class DefaultController extends AbstractController
 {
-    public function home() : void
+    public function home(): void
     {
-        $this->render('home/home.html.twig', []);
+        $projects = PortfolioService::getPublicProjects();
+
+        $featured = array_filter($projects, fn($p) => $p["featured"]);
+
+        $this->render("home/home.html.twig", [
+            "featuredProjects" => $featured
+        ]);
     }
 
     public function projects() : void
